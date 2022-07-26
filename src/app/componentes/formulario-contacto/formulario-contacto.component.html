@@ -1,17 +1,26 @@
 <section id="secContacto">
     <h2>Comunicate con nosotros</h2>
-    <form autocomplete="off" (ngSubmit)="enviarFormulario()">
+    <form #formularioTD="ngForm" autocomplete="off" (ngSubmit)="enviarFormulario(formularioTD)">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre"  required>
-
+        <input #nombreControl="ngModel" type="text" id="nombre" name="nombre" placeholder="Nombre" [(ngModel)]="usuario.nombre" minLength="2" required>
+        <div *ngIf="nombreControl.invalid && nombreControl.dirty" class="alert alert-warning">
+          <p *ngIf="nombreControl.errors['required']">Campo Requerido</p>
+          <p *ngIf="nombreControl.errors['minlength']">Cantidad minima 2 caracteres</p>
+        </div>
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="email@email.com" required>
-
+        <input #emailControl="ngModel" type="email" id="email" name="email" placeholder="email@email.com" [(ngModel)]="usuario.email" required>
+        <div *ngIf="emailControl.invalid && emailControl.dirty" class="alert alert-warning">
+          <p *ngIf="emailControl.errors['required']">Campo Requerido</p>
+          <p *ngIf="emailControl.errors['email']">Cantidad minima 2 caracteres</p>
+        </div>
         <label for="msje">Dejanos tu mensaje:</label>
-        <textarea name="msje" id="msje" cols="30" rows="10" placeholder="Dejanos tu mensaje" required></textarea>
-
+        <textarea #mensajeControl="ngModel" name="msje" id="msje" cols="30" rows="10" placeholder="Dejanos tu mensaje" [(ngModel)]="usuario.mensaje" maxlength="250" required></textarea>
+        <div *ngIf="mensajeControl.invalid && mensajeControl.dirty" class="alert alert-warning">
+          <p *ngIf="mensajeControl.errors['required']">Campo Requerido</p>
+          <p *ngIf="mensajeControl.errors['maxlength']">Cantidad minima 2 caracteres</p>
+        </div>
         <div class="contBtn">
-            <input type="submit" value="Enviar" class="btnForm">
+            <input type="submit" value="Enviar" [disabled]="formularioTD.invalid" class="btnForm">
         </div>
     </form>
 

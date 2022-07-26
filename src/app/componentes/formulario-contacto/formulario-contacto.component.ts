@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/dominio/usuario';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-formulario-contacto',
@@ -10,16 +11,14 @@ export class FormularioContactoComponent implements OnInit {
 
   usuario: Usuario=new Usuario();
 
-
   constructor() {
-
   }
 
   ngOnInit(): void {
   }
 
-  enviarFormulario(){
-
+  enviarFormulario(form: any){
+    console.debug("Persona: ", form.form);
   }
 
 }
