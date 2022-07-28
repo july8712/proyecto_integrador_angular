@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/dominio/usuario';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { NgForm } from '@angular/forms';
+
+interface ContactForm {
+  nombre: "string";
+  email: "string";
+  mensaje: "string";
+}
 
 @Component({
   selector: 'app-formulario-contacto',
@@ -9,7 +14,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class FormularioContactoComponent implements OnInit {
 
-  usuario: Usuario=new Usuario();
+  model = {
+    nombre: "",
+    email: "",
+    mensaje: ""
+  }
 
   constructor() {
   }
@@ -17,8 +26,20 @@ export class FormularioContactoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  enviarFormulario(form: any){
-    console.debug("Persona: ", form.form);
+  onSubmit(form: NgForm): void {
+    console.log('Form values', form );
+
   }
 
 }
+
+// registrarForm() {
+//     this.persona.nombre = this.crearCuenta.value.nombre;
+//     this.persona.apellido = this.crearCuenta.value.apellido;
+//     this.persona.LELCDNI = this.crearCuenta.value.LELCDNI;
+//     this.persona.email = this.crearCuenta.value.email;
+//     this.persona.password = this.crearCuenta.value.password;
+//     console.log("Se ha creado un usuario de manera válida");
+//     console.log(this.persona);
+//     this.crearCuenta.reset();
+//   }

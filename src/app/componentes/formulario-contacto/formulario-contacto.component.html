@@ -1,6 +1,27 @@
 <section id="secContacto">
     <h2>Comunicate con nosotros</h2>
-    <form #formularioTD="ngForm" autocomplete="off" (ngSubmit)="enviarFormulario(formularioTD)">
+
+    <pre>{{contactForm.value | json}}</pre>
+
+    <form (ngSubmit)="onSubmit(contactForm.value)" #contactForm="ngForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" [(ngModel)]="model.nombre" required #nombre="ngModel">
+        <p [hidden]="nombre.valid || nombre.pristine">Ingrese un nombre válido</p>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="tuemail@mail.com" [(ngModel)]="model.email" required #email="ngModel">
+        <p [hidden]="email.valid || email.pristine">Ingrese un email válido</p>
+
+        <label for="mensaje">Contraseña:</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Dejá acá tu mensaje" [(ngModel)]="model.mensaje" required #mensaje="ngModel"></textarea>
+        <p [hidden]="mensaje.valid || mensaje.pristine">Escriba su mensaje</p>
+
+        <div class="contBtn">
+            <input type="submit" value="Registrarme" class="btnForm" [disabled]="contactForm.invalid">
+        </div>
+    </form>
+
+    <!-- <form #formularioTD="ngForm" autocomplete="off" (ngSubmit)="enviarFormulario(formularioTD)">
         <label for="nombre">Nombre:</label>
         <input #nombreControl="ngModel" type="text" id="nombre" name="nombre" placeholder="Nombre" [(ngModel)]="usuario.nombre" minLength="2" required>
         <div *ngIf="nombreControl.invalid && nombreControl.dirty" class="alert alert-warning">
@@ -22,6 +43,6 @@
         <div class="contBtn">
             <input type="submit" value="Enviar" [disabled]="formularioTD.invalid" class="btnForm">
         </div>
-    </form>
+    </form> -->
 
 </section>
